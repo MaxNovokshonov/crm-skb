@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Client} from "../../interfaces/interfaces";
 
 @Component({
   selector: 'app-client',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent {
+  @Input() client: Client
 
 }

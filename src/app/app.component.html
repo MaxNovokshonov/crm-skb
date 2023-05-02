@@ -1,4 +1,7 @@
-<div class="container">
+<div>
   <app-header></app-header>
-  <app-table></app-table>
+  <app-table
+    [clients]="clients"
+  ></app-table>
+  <app-modal *ngIf="!editForm"></app-modal>
 </div>

@@ -20,14 +20,15 @@
         </tr>
         </thead>
         <tbody class="clients__tbody">
-        <app-client></app-client>
-        <app-client></app-client>
-        <app-client></app-client>
-        <app-client></app-client>
-        <app-client></app-client>
-        <app-client></app-client>
+        <app-client
+          *ngFor="let client of clients"
+          [client]="client"
+        ></app-client>
         </tbody>
       </table>
+
+      <app-preloader *ngIf="!loader"></app-preloader>
+
     </div>
     <button class="clients__btn btn-reset">Добавить клиента
       <span class="clients__svg">
@@ -39,6 +40,7 @@
       </span>
     </button>
   </div>
+
 
 </div>
 

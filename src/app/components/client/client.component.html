@@ -1,19 +1,19 @@
 <tr class="clients__item">
   <td class="client__id">
-    <span>242256</span>
+    <span>{{ client.id.slice(-6) }}</span>
   </td>
   <td class="clients__full-name">
-    <span class="clients__surname">Новокшонов</span>
-    <span class="clients__name">Максим</span>
-    <span class="clients__lastname">Сергеевич</span>
+    <span class="clients__surname">{{client.surname}}</span>
+    <span class="clients__name">{{client.name}}</span>
+    <span class="clients__lastname">{{client.lastName}}</span>
   </td>
   <td class="clients__created">
-    <span class="created__date">20.12.2022</span>
-    <span class="created__time">19:20</span>
+    <span class="created__date">{{client.createdAt | date: 'dd.MM.yyyy'}}</span>
+    <span class="created__time">{{client.createdAt | date: 'HH.mm'}}</span>
   </td>
   <td class="clients__changed">
-    <span class="changed__date">20.12.2022</span>
-    <span class="changed__time">19:22</span>
+    <span class="changed__date">{{client.updatedAt | date: 'dd.MM.yyyy'}}</span>
+    <span class="changed__time">{{client.updatedAt | date: 'HH.mm'}}</span>
   </td>
   <td class="clients__contacts">
   </td>

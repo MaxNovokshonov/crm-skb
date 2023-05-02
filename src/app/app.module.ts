@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TableComponent } from './components/table/table.component';
 import { ClientComponent } from './components/client/client.component';
+import { PreloaderComponent } from './components/preloader/preloader.component';
+import { ModalComponent } from './components/modal/modal.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     TableComponent,
-    ClientComponent
+    ClientComponent,
+    PreloaderComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

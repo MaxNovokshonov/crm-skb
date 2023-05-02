@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Client} from "../../interfaces/interfaces";
 
 @Component({
   selector: 'app-table',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class TableComponent {
 
+  @Input() clients: Client[]
+  loader = true;
 }
