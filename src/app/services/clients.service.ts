@@ -7,17 +7,24 @@
 // contacts - массив объектов контактов вида { type: string, value: string }
 // DELETE /api/clients/{id} - удалить клиента по ID
 
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
-import {Client} from "../interfaces/interfaces";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+import { Client } from '../interfaces/interfaces';
 
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: 'root' })
 export class ClientsService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<Client[]> {
     return this.http.get<Client[]>('http://localhost:3000/api/clients');
+  }
+
+  deleteById(id: string): Observable<void> {
+    return this.http.delete<void>(`http://localhost:3000/api/clients/${id}`);
+  }
+
+  addClient(client: Client): Observable<Client> {
+    return this.http.post<Client>(`http://localhost:3000/api/clients`, client);
   }
 }

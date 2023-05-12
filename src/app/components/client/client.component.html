@@ -16,10 +16,32 @@
     <span class="changed__time">{{client.updatedAt | date: 'HH.mm'}}</span>
   </td>
   <td class="clients__contacts">
+    <div *ngIf="client.contacts && client.contacts.length !== 0; else noContacts">
+      <app-contacts
+        *ngFor="let contact of client.contacts"
+        [contact]="contact"
+      ></app-contacts>
+    </div>
   </td>
   <td class="clients__actions">
     <button class="clients__edit btn-reset">Изменить</button>
-    <button class="clients__delete btn-reset">Удалить</button>
+    <button
+      class="clients__delete btn-reset"
+      (click)="isDeleteModalOpen = true"
+    >Удалить
+    </button>
 
   </td>
 </tr>
+
+<ng-template #noContacts>
+  <span class="no-contacts">Нет данных о контактах</span>
+</ng-template>
+
+<app-delete-modal
+  [hidden]="!isDeleteModalOpen"
+  (closeModal)="isDeleteModalOpen = false"
+  (deleteClient)="deleteById()"
+  [id]="client.id"
+></app-delete-modal>
+

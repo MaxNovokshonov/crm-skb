@@ -14,7 +14,7 @@
 }
 
 .clients__wrapper {
-  position: relative;
+  //position: relative;
   margin-bottom: 20px;
   padding-top: 5px;
   width: 100%;
@@ -61,6 +61,13 @@
 .display-info__item--change {
   cursor: pointer;
   user-select: none;
+}
+
+.display-info__item--id:hover,
+.display-info__item--name:hover,
+.display-info__item--create:hover,
+.display-info__item--change:hover {
+  color: #9873ff;
 }
 
 .display-info__item--id {
@@ -132,9 +139,9 @@
   fill: #9873ff;
 }
 
-.clients__tbody {
-  position: relative;
-}
+//.clients__tbody {
+//  position: relative;
+//}
 
 .clients__btn:hover {
   transition: color .3s ease-in-out, background-color .3s ease-in-out;

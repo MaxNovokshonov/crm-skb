@@ -1,0 +1,19 @@
+<div class="contact">
+  <div class="contact__type">
+    <button class="contact__name">{{contact.type}}</button>
+    <ul class="contact__list list-reset">
+      <li class="contact__item">Телефон</li>
+      <li class="contact__item">Email</li>
+      <li class="contact__item">VK</li>
+      <li class="contact__item">Facebook</li>
+      <li class="contact__item">Другое</li>
+    </ul>
+  </div>
+  <input class="contact__input" placeholder="Введите данные контакта" type="text" [value]="contact.value">
+  <button class="contact__delete">
+    <svg width="12" height="12" viewBox="0 0 12 12">
+      <use xlink:href="/assets/img/icon-sprite.svg#svgDelete"></use>
+    </svg>
+    <span class="contact-tooltip site-tooltip">Удалить контакт</span>
+  </button>
+</div>

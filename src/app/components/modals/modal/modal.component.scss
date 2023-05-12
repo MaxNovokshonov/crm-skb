@@ -96,7 +96,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 -30px 25px;
-  background-color: var(--color-gray-suit);
+  background-color: var(--color-athens-gray);
 }
 
 .modal__btn-contact {
@@ -185,9 +185,13 @@
   align-self: center;
   display: flex;
   flex-direction: column;
-  margin: -17px 0 10px;
+  margin: 5px;
   max-width: 255px;
   color: var(--color-burnt-sienna);
+}
+
+.border-red {
+  border-color: var(--color-burnt-sienna);
 }
 
 .modal__spinner {
@@ -219,3 +223,6 @@
     transform: rotate(360deg)
   }
 }
+
+
+

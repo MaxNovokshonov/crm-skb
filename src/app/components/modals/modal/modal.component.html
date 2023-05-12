@@ -1,28 +1,52 @@
-<div class="modal site-modal modal-active">
-  <div class="site-modal__content modal-active">
-    <button class="modal__close btn-reset"></button>
-    <h2 class="modal__title">Новый клиент</h2>
-    <form class="modal__form add-client">
+<div class="modal site-modal modal-active" (click)="closeModalEvent()">
+  <div class="site-modal__content modal-active" (click)="handleClick($event)">
+    <button class="modal__close btn-reset"
+            (click)="closeModalEvent()"
+    ></button>
+    <h2 class="modal__title">{{title | titlecase}}
+      <span *ngIf="id" class="modal__id">ID: {{id}}</span>
+    </h2>
+    <form class="modal__form add-client"
+          [formGroup]="form" (ngSubmit)="submit()"
+    >
       <div class="form-floating">
-        <input class="modal__input" type="text" placeholder="Фамилия">
+        <input class="modal__input" type="text" placeholder="Фамилия" formControlName="surname"
+               [ngClass]="{
+                'border-red': surname.touched && surname.invalid
+             }"
+        >
         <label class="modal__label">Фамилия
           <span class="modal__label">*</span>
         </label>
       </div>
       <div class="form-floating">
-        <input class="modal__input" type="text" placeholder="Имя">
+        <input class="modal__input" type="text" placeholder="Имя" formControlName="name"
+               [ngClass]="{
+                'border-red': name.touched && name.invalid
+             }"
+        >
         <label class="modal__label">Имя
           <span class="modal__label">*</span>
         </label>
       </div>
       <div class="form-floating">
-        <input class="modal__input" type="text" placeholder="Отчество">
+        <input class="modal__input" type="text" placeholder="Отчество" formControlName="lastname"
+               [ngClass]="{
+                'border-red': lastname.touched && lastname.invalid
+             }"
+        >
         <label class="modal__label">Отчество
           <span class="modal__label">*</span>
         </label>
       </div>
       <div class="modal__contact">
-        <button class="modal__btn-contact modal__btn-contact--active">Добавить контакт
+        <ng-container *ngIf="contactsList.length > 0">
+          <app-modal-contact-list *ngFor="let contact of contactsList" [contact]="contact"></app-modal-contact-list>
+        </ng-container>
+        <button class="modal__btn-contact modal__btn-contact--active"
+                (click)="increment($event)"
+                [disabled]="contactsCounter >= 10"
+        >Добавить контакт
           <span class="btn-contact__svg btn-contact__svg--default btn-contact__svg--active">
             <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -38,8 +62,19 @@
           </span>
         </button>
       </div>
-      <p class="modal__error">Ошибка Ёбанарот!</p>
-      <button class="modal__btn-save btn-reset site-btn">Сохранить
+      <p class="modal__error"
+         *ngIf="surname.errors?.required && surname.touched"
+      >Введите фамилию клиента</p>
+      <p class="modal__error"
+         *ngIf="name.errors?.required && name.touched"
+      >Введите имя клиента</p>
+      <p class="modal__error"
+         *ngIf="lastname.errors?.required && lastname.touched"
+      >Введите отчество клиента</p>
+      <button class="modal__btn-save btn-reset site-btn"
+              type="submit"
+              [disabled]="form.invalid"
+      >{{saveButtonTitle}}
         <span class="modal__spinner">
           <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -48,7 +83,9 @@
           </svg>
         </span>
       </button>
-      <button class="modal__btn-back btn-reset">Отмена</button>
+      <button class="modal__btn-back btn-reset"
+              (click)="closeModalEvent()"
+      >{{cancelButtonTitle}}</button>
     </form>
   </div>
 </div>

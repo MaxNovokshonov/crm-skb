@@ -1,0 +1,74 @@
+.contacts__link {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-bottom: 7px;
+  margin-right: 7px;
+}
+
+.contacts__link:not(:last-child) {
+  margin-right: 7px;
+}
+
+.contacts__link g,
+.contacts__link path {
+  transition: opacity .3s ease-in-out;
+}
+
+.contacts__link:hover g,
+.contacts__link:hover path {
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+}
+
+.contact-tooltip {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  width: auto;
+}
+
+.contact-tooltip__type {
+  margin-right: 2px;
+  color: var(--color-white);
+}
+
+.contact-tooltip__value {
+  display: block;
+  font-weight: 700;
+  color: var(--color-heliotrope);
+}
+
+.contacts__link:hover .contact-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out, transform .5s ease-in-out;
+}
+
+.site-tooltip {
+  position: absolute;
+  top: -41px;
+  display: block;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+  padding: 7px 15px;
+  background-color: var(--color-black3);
+}
+
+.site-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%);
+  clip-path: polygon(100% 0, 0 0, 51% 100%);
+  background-color: var(--color-black3);
+}
+

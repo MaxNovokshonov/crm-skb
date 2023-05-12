@@ -1,0 +1,31 @@
+<div class="delete-modal site-modal modal-active" (click)="closeModalEvent()">
+  <div class="delete-modal__content site-modal__content modal-active"
+    (click)="handleClick($event)"
+  >
+    <button
+      class="modal__close btn-reset"
+      (click)="closeModalEvent()"
+    ></button>
+    <h2 class="modal__title delete-modal__title">Удалить клиента</h2>
+    <p class="delete-modal__text">Вы действительно хотите удалить данного клиента?</p>
+    <p
+      class="modal__error"
+      *ngIf="isDeleted"
+    >Данные о клиенте удалены</p>
+    <button
+      class="delete-modal__delete btn-reset site-btn"
+      (click)="deleteById(id)"
+    >Удалить
+      <span [class.modal__spinner]="isDeleting">
+        <svg width="13" height="13" viewBox="0 0 13 13">
+          <use xlink:href="/assets/img/icon-sprite.svg#svgSpinner"></use>
+        </svg>
+      </span>
+    </button>
+    <button
+      class="delete-modal__back btn-reset"
+      (click)="closeModalEvent()"
+    >Отмена
+    </button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+
+
+<a class="contacts__link">
+  <svg
+    *ngIf="contact.type === 'Email'"
+    width="16" height="16" viewBox="0 0 16 16">
+    <use xlink:href="/assets/img/icon-sprite.svg#svgEmail"></use>
+  </svg>
+  <svg
+    *ngIf="contact.type === 'VK'"
+    width="16" height="16" viewBox="0 0 16 16">
+    <use xlink:href="/assets/img/icon-sprite.svg#svgVk"></use>
+  </svg>
+  <svg
+    *ngIf="contact.type === 'Facebook'"
+    width="16" height="16" viewBox="0 0 16 16">
+    <use xlink:href="/assets/img/icon-sprite.svg#svgFb"></use>
+  </svg>
+  <svg
+    *ngIf="contact.type === 'Телефон'"
+    width="16" height="16" viewBox="0 0 16 16">
+    <use xlink:href="/assets/img/icon-sprite.svg#svgPhone"></use>
+  </svg>
+  <svg
+    *ngIf="contact.type === 'Другое'"
+    width="16" height="16" viewBox="0 0 16 16">
+    <use xlink:href="/assets/img/icon-sprite.svg#svgOther"></use>
+  </svg>
+  <div class="contact-tooltip site-tooltip">
+    <span class="contact-tooltip__type">{{contact.type}}</span>
+    <span class="contact-tooltip__value">{{contact.value}}</span>
+  </div>
+</a>
