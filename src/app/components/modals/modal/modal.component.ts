@@ -15,7 +15,7 @@ import { ClientsService } from '../../../services/clients.service';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
-  constructor(private clientService: ClientsService, private fb: FormBuilder) {}
+  constructor(private clientService: ClientsService) {}
 
   @Input() title: ModalTitle;
   @Input() id: string;
@@ -24,9 +24,15 @@ export class ModalComponent implements OnInit {
   @Output() closeModal = new EventEmitter();
   @Output() getAll = new EventEmitter();
 
-  contact: ClientContacts = { type: 'VK', value: '123' };
-  contactsList: ClientContacts[] = [];
+  contactsList: ClientContacts[] = [
+    {
+      index: 0,
+      type: 'VK',
+      value: 'khll',
+    },
+  ];
   contactsCounter = 0;
+  contactsFormOpen = false;
   form = new FormGroup({
     surname: new FormControl<string>('', Validators.required),
     name: new FormControl<string>('', Validators.required),
@@ -53,11 +59,9 @@ export class ModalComponent implements OnInit {
 
   increment(event: Event) {
     event.preventDefault();
-    this.contact.type = 'Телефон';
-    this.contact.value = `${this.contactsCounter}`;
+    this.contactsFormOpen = true;
     this.contactsCounter++;
-    this.contactsList.push(this.contact);
-    console.log(this.contactsList);
+    console.log(this.contactsFormOpen);
     console.log(this.contactsCounter);
   }
 
@@ -73,6 +77,7 @@ export class ModalComponent implements OnInit {
       lastName: this.form.value.lastname,
       createdAt: new Date(),
       updatedAt: new Date(),
+      contacts: this.contactsList,
     };
 
     this.clientService.addClient(client).subscribe(() => {
@@ -87,5 +92,12 @@ export class ModalComponent implements OnInit {
 
   handleClick($event: MouseEvent) {
     $event.stopPropagation();
+  }
+
+  addContacts(event: ClientContacts) {
+    this.contactsFormOpen = true;
+    this.contactsList.push(event);
+    console.log(event);
+    console.log(this.contactsList);
   }
 }

@@ -1,4 +1,4 @@
 <div>
-  <app-header></app-header>
-  <app-table></app-table>
+  <app-header (search)="searchEvent($event)"></app-header>
+  <app-table [searchStr]="search"></app-table>
 </div>

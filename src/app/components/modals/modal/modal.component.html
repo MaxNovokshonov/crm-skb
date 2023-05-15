@@ -40,8 +40,13 @@
         </label>
       </div>
       <div class="modal__contact">
-        <ng-container *ngIf="contactsList.length > 0">
-          <app-modal-contact-list *ngFor="let contact of contactsList" [contact]="contact"></app-modal-contact-list>
+        <ng-container *ngIf="contactsList.length > 0 || contactsFormOpen == true">
+          <app-modal-contact-list
+            *ngFor="let contact of contactsList, let i = index"
+            [contact]="contact"
+            [index]="i"
+            (savedContact)="addContacts($event)"
+          ></app-modal-contact-list>
         </ng-container>
         <button class="modal__btn-contact modal__btn-contact--active"
                 (click)="increment($event)"

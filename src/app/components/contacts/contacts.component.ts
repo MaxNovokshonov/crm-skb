@@ -9,7 +9,5 @@ import { ClientContacts } from '../../interfaces/interfaces';
 export class ContactsComponent implements OnInit {
   @Input() contact: ClientContacts;
 
-  ngOnInit(): void {
-    console.log('Контакты', this.contact);
-  }
+  ngOnInit(): void {}
 }

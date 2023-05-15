@@ -6,18 +6,26 @@
         <thead class="clients__display display-info">
         <tr class="display-info__wrapper">
           <th
-            class="display-info__item display-info__item--id sort-up"
+            (click)="sortBy('id')"
+            class="display-info__item display-info__item--id"
           >id</th>
           <th
-            class="display-info__item display-info__item--name sort-down"
+            (click)="sortBy('surname')"
+            class="display-info__item display-info__item--name"
           >Фамилия Имя Отчество
-            <span class="display-info__sorting heliotrope">а-я</span>
+            <span
+              class="display-info__sorting heliotrope">а-я</span>
           </th>
-          <th class="display-info__item display-info__item--create sort-down">Дата и время создания
-            <span class="create__span"></span>
+          <th
+            (click)="sortBy('createdAt')"
+            class="display-info__item display-info__item--create">Дата и время создания
+<!--            <span class="create__span"></span>-->
           </th>
-          <th class="display-info__item display-info__item--change sort-down">Последние изменения
-            <span class="change__span"></span>
+          <th
+            (click)="sortBy('updatedAt')"
+
+            class="display-info__item display-info__item--change">Последние изменения
+<!--            <span class="change__span"></span>-->
           </th>
           <th class="display-info__item display-info__item--contacts">Контакты</th>
           <th class="display-info__item display-info__item--actions">Действия</th>
@@ -27,7 +35,7 @@
                *ngIf="clients$ | async as clients"
         >
         <app-client
-          *ngFor="let client of clients"
+          *ngFor="let client of clients | searchPipe:searchStr"
           [client]="client"
           (delete)="getAllClients()"
         ></app-client>

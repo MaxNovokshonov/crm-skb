@@ -97,6 +97,7 @@
   justify-content: flex-start;
   padding-left: 10px;
   width: calc(15% - 1px);
+  background-position: 149px center;
 }
 
 .display-info__item--change {
@@ -105,6 +106,7 @@
   justify-content: flex-start;
   width: calc(15% + 6px);
   padding-left: 15px;
+  background-position: 152px center;
 }
 
 .display-info__item--contacts {
@@ -181,10 +183,10 @@
   background-image: url('/assets/img/arrow-down.svg');
 }
 
-.display-info__item--change,
-.display-info__item--create {
-  background-image: none;
-}
+//.display-info__item--change,
+//.display-info__item--create {
+//  background-image: none;
+//}
 
 .clients__btn {
   display: flex;

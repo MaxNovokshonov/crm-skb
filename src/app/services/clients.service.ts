@@ -16,15 +16,29 @@ import { Client } from '../interfaces/interfaces';
 export class ClientsService {
   constructor(private http: HttpClient) {}
 
+  getPropByPath(object: any, path: string[]): any {
+    return path.reduce((obj, propName) => obj[propName], object);
+  }
+
   getAll(): Observable<Client[]> {
-    return this.http.get<Client[]>('http://localhost:3000/api/clients');
+    return this.http.get<Client[]>('https://crm-skb-default-rtdb.firebaseio.com/clients.json').pipe(
+      map((response: { [key: string]: any }) => {
+        return Object.keys(response).map((key) => ({
+          ...response[key],
+          id: key,
+        }));
+      }),
+    );
   }
 
   deleteById(id: string): Observable<void> {
-    return this.http.delete<void>(`http://localhost:3000/api/clients/${id}`);
+    return this.http.delete<void>(`https://crm-skb-default-rtdb.firebaseio.com/clients/${id}.json`);
   }
 
   addClient(client: Client): Observable<Client> {
-    return this.http.post<Client>(`http://localhost:3000/api/clients`, client);
+    return this.http.post<Client>(
+      `https://crm-skb-default-rtdb.firebaseio.com/clients.json`,
+      client,
+    );
   }
 }

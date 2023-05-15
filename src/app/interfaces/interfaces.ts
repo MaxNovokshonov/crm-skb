@@ -4,6 +4,7 @@ export type ModalCancelButton = 'Отмена' | 'Удалить клиента'
 export type ModalSaveButton = 'Добавить' | 'Изменить';
 
 export interface ClientContacts {
+  index: number;
   type: ContactsType;
   value: string;
 }

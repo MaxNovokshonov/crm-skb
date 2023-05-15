@@ -13,6 +13,7 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
 import { ModalContactListComponent } from './components/modals/modal-contact-list/modal-contact-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ContactsComponent,
     DeleteModalComponent,
     ModalContactListComponent,
+    SearchPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [],

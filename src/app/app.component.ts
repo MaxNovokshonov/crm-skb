@@ -1,7 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ClientsService } from './services/clients.service';
-import { Observable, Subscription } from 'rxjs';
-import { Client } from './interfaces/interfaces';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +7,13 @@ import { Client } from './interfaces/interfaces';
 })
 export class AppComponent implements OnInit {
   title = 'CRM-skb';
+  search = '';
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  searchEvent(str: any) {
+    this.search = str;
+  }
 }
