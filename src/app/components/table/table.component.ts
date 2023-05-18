@@ -46,8 +46,8 @@ export class TableComponent implements OnInit {
           ];
         }),
       );
-    }, 500);
-    this.loader = false;
+      this.loader = false;
+    }, 1000);
   }
 
   openAddModal() {
@@ -59,10 +59,8 @@ export class TableComponent implements OnInit {
   }
 
   sortBy(field: string): void {
-    console.log(field);
     if (field === this.sortField.getValue()) {
       this.sortDirection *= -1;
-      console.log(this.sortDirection);
     } else {
       this.sortDirection = 1;
     }

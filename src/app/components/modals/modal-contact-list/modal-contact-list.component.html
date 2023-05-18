@@ -1,35 +1,25 @@
-<div class="contact" (focusout)="saveContact()">
+<div class="contact">
   <div class="contact__type" (mouseleave)="closeContacts()">
     <button
-      (mouseenter)="openContacts()"
-      (click)="openContacts()"
+      (mouseenter)="openContacts($event)"
+      (click)="openContacts($event)"
       [class.contact__list--active]="isOpenContacts"
-      class="contact__name">{{selectedType}}</button>
+      class="contact__name">{{contact.type}}</button>
     <ul
       [class.contact__list--active]="isOpenContacts"
       class="contact__list list-reset">
       <li
-        (click)="setType($event.target)"
-        class="contact__item">Телефон</li>
-      <li
-        (click)="setType($event.target)"
-        class="contact__item">Email</li>
-      <li
-        (click)="setType($event.target)"
-        class="contact__item">VK</li>
-      <li
-        (click)="setType($event.target)"
-        class="contact__item">Facebook</li>
-      <li
-        (click)="setType($event.target)"
-        class="contact__item">Другое</li>
+        *ngFor="let type of types"
+        (click)="setType(type)"
+        class="contact__item">{{type}}
+      </li>
     </ul>
   </div>
   <input
-    [(ngModel)]="typeValue"
-    class="contact__input" placeholder="Введите данные контакта" type="text">
+    [(ngModel)]="contact.value"
+    class="contact__input" placeholder="Введите данные контакта" type="text" [name]="index.toString()">
   <button
-    (click)="delete()"
+    (click)="delete($event, contact)"
     class="contact__delete">
     <svg width="12" height="12" viewBox="0 0 12 12">
       <use xlink:href="/assets/img/icon-sprite.svg#svgDelete"></use>

@@ -39,7 +39,7 @@
 </ng-template>
 
 <app-delete-modal
-  [hidden]="!isDeleteModalOpen"
+  *ngIf="isDeleteModalOpen"
   (closeModal)="isDeleteModalOpen = false"
   (deleteClient)="deleteById()"
   [id]="client.id"

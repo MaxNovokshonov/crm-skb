@@ -40,17 +40,17 @@
         </label>
       </div>
       <div class="modal__contact">
-        <ng-container *ngIf="contactsList.length > 0 || contactsFormOpen == true">
+        <ng-container *ngIf="contactsFormOpen == true">
           <app-modal-contact-list
-            *ngFor="let contact of contactsList, let i = index"
+            *ngFor="let contact of contactsService.getContacts(), let i = index"
             [contact]="contact"
             [index]="i"
-            (savedContact)="addContacts($event)"
-          ></app-modal-contact-list>
+            (deleteContact)="deleteContactByIndex($event)">
+          </app-modal-contact-list>
         </ng-container>
         <button class="modal__btn-contact modal__btn-contact--active"
                 (click)="increment($event)"
-                [disabled]="contactsCounter >= 10"
+                [disabled]="contactsService.getContacts().length >= 10"
         >Добавить контакт
           <span class="btn-contact__svg btn-contact__svg--default btn-contact__svg--active">
             <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
@@ -68,13 +68,13 @@
         </button>
       </div>
       <p class="modal__error"
-         *ngIf="surname.errors?.required && surname.touched"
+         *ngIf="surname.errors?.required"
       >Введите фамилию клиента</p>
       <p class="modal__error"
-         *ngIf="name.errors?.required && name.touched"
+         *ngIf="name.errors?.required"
       >Введите имя клиента</p>
       <p class="modal__error"
-         *ngIf="lastname.errors?.required && lastname.touched"
+         *ngIf="lastname.errors?.required"
       >Введите отчество клиента</p>
       <button class="modal__btn-save btn-reset site-btn"
               type="submit"

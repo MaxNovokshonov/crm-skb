@@ -1,4 +1,11 @@
 export type ContactsType = 'Телефон' | 'Email' | 'Facebook' | 'VK' | 'Другое';
+export enum Contacts {
+  phone = 'Телефон',
+  email = 'Email',
+  facebook = 'Facebook',
+  vk = 'VK',
+  other = 'Другое',
+}
 export type ModalTitle = 'Новый клиент' | 'Изменить данные';
 export type ModalCancelButton = 'Отмена' | 'Удалить клиента';
 export type ModalSaveButton = 'Добавить' | 'Изменить';

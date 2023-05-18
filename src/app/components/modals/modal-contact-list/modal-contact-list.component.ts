@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ClientContacts, ContactsType } from '../../../interfaces/interfaces';
+import { ClientContacts, Contacts, ContactsType } from '../../../interfaces/interfaces';
+import { ContactsService } from '../../../services/contacts.service';
 
 @Component({
   selector: 'app-modal-contact-list',
@@ -9,13 +10,17 @@ import { ClientContacts, ContactsType } from '../../../interfaces/interfaces';
 export class ModalContactListComponent {
   @Input() contact: ClientContacts;
   @Input() index: number;
-  @Output() savedContact = new EventEmitter<ClientContacts>();
-  @Output() deleteContact = new EventEmitter();
+  @Output() deleteContact = new EventEmitter<ClientContacts>();
   isOpenContacts = false;
   selectedType: ContactsType = 'Телефон';
   typeValue = '';
+  types = Object.values(Contacts);
 
-  openContacts() {
+  constructor(private contactsService: ContactsService) {}
+
+  openContacts(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
     this.isOpenContacts = true;
   }
 
@@ -23,20 +28,12 @@ export class ModalContactListComponent {
     this.isOpenContacts = false;
   }
 
-  setType(event: any) {
-    this.selectedType = event.innerHTML;
-    console.log(this.typeValue);
+  setType(type: ContactsType) {
+    this.contact.type = type;
   }
 
-  delete() {
-    this.deleteContact.emit();
-  }
-
-  saveContact() {
-    this.savedContact.emit({
-      index: this.index,
-      type: this.selectedType,
-      value: this.typeValue,
-    });
+  delete(event: MouseEvent, contact: ClientContacts) {
+    event.preventDefault();
+    this.deleteContact.emit(contact);
   }
 }

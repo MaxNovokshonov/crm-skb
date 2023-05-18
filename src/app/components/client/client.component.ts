@@ -13,7 +13,6 @@ export class ClientComponent {
 
   @Input() client: Client;
   @Output() delete = new EventEmitter();
-  dSub: Subscription;
   clients: Client[] = [];
   isDeleteModalOpen = false;
 
