@@ -3,9 +3,9 @@
     <span>{{ client.id.toString().slice(-6) }}</span>
   </td>
   <td class="clients__full-name">
-    <span class="clients__surname">{{client.surname}}</span>
-    <span class="clients__name">{{client.name}}</span>
-    <span class="clients__lastname">{{client.lastName}}</span>
+    <span class="clients__surname">{{client.surname | titlecase}}</span>
+    <span class="clients__name">{{client.name | titlecase}}</span>
+    <span class="clients__lastname">{{client.lastName | titlecase}}</span>
   </td>
   <td class="clients__created">
     <span class="created__date">{{client.createdAt | date: 'dd.MM.yyyy'}}</span>

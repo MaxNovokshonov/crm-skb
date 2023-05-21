@@ -7,10 +7,14 @@
         <tr class="display-info__wrapper">
           <th
             (click)="sortBy('id')"
+            [class.sort-down]="sortDirection === -1 && sortField.getValue() === 'id'"
+            [class.sort-up]="sortDirection === 1 && sortField.getValue() === 'id'"
             class="display-info__item display-info__item--id"
           >id</th>
           <th
             (click)="sortBy('surname')"
+            [class.sort-down]="sortDirection === -1 && sortField.getValue() === 'surname'"
+            [class.sort-up]="sortDirection === 1 && sortField.getValue() === 'surname'"
             class="display-info__item display-info__item--name"
           >Фамилия Имя Отчество
             <span
@@ -18,12 +22,15 @@
           </th>
           <th
             (click)="sortBy('createdAt')"
+            [class.sort-down]="sortDirection === -1 && sortField.getValue() === 'createdAt'"
+            [class.sort-up]="sortDirection === 1 && sortField.getValue() === 'createdAt'"
             class="display-info__item display-info__item--create">Дата и время создания
 <!--            <span class="create__span"></span>-->
           </th>
           <th
             (click)="sortBy('updatedAt')"
-
+            [class.sort-down]="sortDirection === -1 && sortField.getValue() === 'updatedAt'"
+            [class.sort-up]="sortDirection === 1 && sortField.getValue() === 'updatedAt'"
             class="display-info__item display-info__item--change">Последние изменения
 <!--            <span class="change__span"></span>-->
           </th>

@@ -26,11 +26,13 @@ export class ModalComponent implements OnDestroy {
   @Output() getAll = new EventEmitter();
 
   contactsFormOpen = false;
+  isLoading = false;
+  isFormInvalid = false;
   contactsCounter = 0;
   form = new FormGroup({
-    surname: new FormControl<string>('', Validators.required),
-    name: new FormControl<string>('', Validators.required),
-    lastname: new FormControl<string>('', Validators.required),
+    surname: new FormControl<string>('', [Validators.required, Validators.pattern('[А-Яа-я]+')]),
+    name: new FormControl<string>('', [Validators.required, Validators.pattern('[А-Яа-я]+')]),
+    lastname: new FormControl<string>('', [Validators.required, Validators.pattern('[А-Яа-я]+')]),
   });
 
   get surname() {
@@ -61,6 +63,8 @@ export class ModalComponent implements OnDestroy {
       return;
     }
 
+    this.isLoading = true;
+
     const client: Client = {
       id: '',
       surname: this.form.value.surname,
@@ -76,6 +80,7 @@ export class ModalComponent implements OnDestroy {
     this.clientService.addClient(client).subscribe(() => {
       this.form.reset();
       console.log('Клиент создан');
+      this.isLoading = false;
       this.contactsService.clearContacts();
       this.closeModal.emit();
       this.getAll.emit();
@@ -92,5 +97,11 @@ export class ModalComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.contactsService.clearContacts();
+  }
+
+  showErrorMessage() {
+    if (this.form.invalid) {
+      this.isFormInvalid = true;
+    }
   }
 }

@@ -1,29 +1,39 @@
-<div class="contact">
-  <div class="contact__type" (mouseleave)="closeContacts()">
+<div>
+  <span
+    *ngIf="control.errors?.required && control.touched"
+    class="modal__error">Поле обязательно для заполнения</span>
+  <span
+    *ngIf="(control.errors?.minlength || control.errors?.pattern || control.errors?.email) && control.touched"
+    class="modal__error">Введите корректные значения</span>
+  <form
+    [formGroup]="contactsForm"
+    class="contact">
+    <div class="contact__type" (mouseleave)="closeContacts()">
+      <button
+        (mouseenter)="openContacts($event)"
+        (click)="openContacts($event)"
+        [class.contact__list--active]="isOpenContacts"
+        class="contact__name">{{contact.type}}</button>
+      <ul
+        [class.contact__list--active]="isOpenContacts"
+        class="contact__list list-reset">
+        <li
+          *ngFor="let type of types"
+          (click)="setType(type)"
+          class="contact__item">{{type}}
+        </li>
+      </ul>
+    </div>
+    <input
+      [(ngModel)]="contact.value"
+      class="contact__input" placeholder="Введите данные" type="text" formControlName="control">
     <button
-      (mouseenter)="openContacts($event)"
-      (click)="openContacts($event)"
-      [class.contact__list--active]="isOpenContacts"
-      class="contact__name">{{contact.type}}</button>
-    <ul
-      [class.contact__list--active]="isOpenContacts"
-      class="contact__list list-reset">
-      <li
-        *ngFor="let type of types"
-        (click)="setType(type)"
-        class="contact__item">{{type}}
-      </li>
-    </ul>
-  </div>
-  <input
-    [(ngModel)]="contact.value"
-    class="contact__input" placeholder="Введите данные контакта" type="text" [name]="index.toString()">
-  <button
-    (click)="delete($event, contact)"
-    class="contact__delete">
-    <svg width="12" height="12" viewBox="0 0 12 12">
-      <use xlink:href="/assets/img/icon-sprite.svg#svgDelete"></use>
-    </svg>
-    <span class="contact-tooltip site-tooltip">Удалить контакт</span>
-  </button>
+      (click)="delete($event, contact)"
+      class="contact__delete">
+      <svg width="12" height="12" viewBox="0 0 12 12">
+        <use xlink:href="/assets/img/icon-sprite.svg#svgDelete"></use>
+      </svg>
+      <span class="contact-tooltip site-tooltip">Удалить контакт</span>
+    </button>
+  </form>
 </div>
