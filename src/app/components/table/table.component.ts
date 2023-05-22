@@ -14,10 +14,9 @@ export class TableComponent implements OnInit {
   isAddModalOpen = false;
   @Input() searchStr: string;
   loader = false;
-  clients: Client[] = [];
   clients$: Observable<Client[]>;
   sortDirection = 1;
-  sortField = new BehaviorSubject<string>('');
+  sortField = new BehaviorSubject<string>('surname');
 
   ngOnInit(): void {
     this.getAllClients();
@@ -25,29 +24,27 @@ export class TableComponent implements OnInit {
 
   getAllClients() {
     this.loader = true;
-    setTimeout(() => {
-      this.clients$ = combineLatest(this.clientsService.getAll(), this.sortField).pipe(
-        map(([client, field]) => {
-          return [
-            ...client.sort((aPerson, bPerson) => {
-              const path = field.split('.');
-              const aPropValue = this.clientsService.getPropByPath(aPerson, path);
-              const bPropValue = this.clientsService.getPropByPath(bPerson, path);
+    this.clients$ = combineLatest(this.clientsService.getAll(), this.sortField).pipe(
+      map(([client, field]) => {
+        return [
+          ...client.sort((aPerson, bPerson) => {
+            const path = field.split('.');
+            const aPropValue = this.clientsService.getPropByPath(aPerson, path);
+            const bPropValue = this.clientsService.getPropByPath(bPerson, path);
 
-              const less = -1 * this.sortDirection;
-              const more = 1 * this.sortDirection;
+            const less = -1 * this.sortDirection;
+            const more = 1 * this.sortDirection;
 
-              if (typeof aPropValue === 'string') {
-                return aPropValue.toLowerCase() <= bPropValue.toLowerCase() ? less : more;
-              } else {
-                return aPropValue <= bPropValue ? less : more;
-              }
-            }),
-          ];
-        }),
-      );
-      this.loader = false;
-    }, 1000);
+            if (typeof aPropValue === 'string') {
+              return aPropValue.toLowerCase() <= bPropValue.toLowerCase() ? less : more;
+            } else {
+              return aPropValue <= bPropValue ? less : more;
+            }
+          }),
+        ];
+      }),
+    );
+    this.loader = false;
   }
 
   openAddModal() {

@@ -1,11 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import {
-  Client,
-  ClientContacts,
-  ModalCancelButton,
-  ModalSaveButton,
-  ModalTitle,
-} from '../../../interfaces/interfaces';
+import { Client, ClientContacts } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from '../../../services/clients.service';
 import { ContactsService } from '../../../services/contacts.service';
@@ -18,10 +12,6 @@ import { ContactsService } from '../../../services/contacts.service';
 export class ModalComponent implements OnDestroy {
   constructor(private clientService: ClientsService, public contactsService: ContactsService) {}
 
-  @Input() title: ModalTitle;
-  @Input() id: string;
-  @Input() saveButtonTitle: ModalSaveButton;
-  @Input() cancelButtonTitle: ModalCancelButton;
   @Output() closeModal = new EventEmitter();
   @Output() getAll = new EventEmitter();
 
@@ -67,9 +57,9 @@ export class ModalComponent implements OnDestroy {
 
     const client: Client = {
       id: '',
-      surname: this.form.value.surname,
-      name: this.form.value.name,
-      lastName: this.form.value.lastname,
+      surname: this.form.value.surname!,
+      name: this.form.value.name!,
+      lastName: this.form.value.lastname!,
       createdAt: new Date(),
       updatedAt: new Date(),
       contacts: this.contactsService.getContacts().filter((contact) => {

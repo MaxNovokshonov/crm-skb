@@ -24,7 +24,10 @@
     </div>
   </td>
   <td class="clients__actions">
-    <button class="clients__edit btn-reset">Изменить</button>
+    <button class="clients__edit btn-reset"
+            (click)="openEditModal()"
+    >Изменить
+    </button>
     <button
       class="clients__delete btn-reset"
       (click)="isDeleteModalOpen = true"
@@ -44,4 +47,12 @@
   (deleteClient)="deleteById()"
   [id]="client.id"
 ></app-delete-modal>
+
+<app-edit-modal
+  *ngIf="isEditModalOpen"
+  [id] = "client.id"
+  (closeModal)="closeEditModal()"
+  (deleteClient)="deleteById()"
+>
+</app-edit-modal>
 

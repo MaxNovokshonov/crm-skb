@@ -15,7 +15,6 @@ export class DeleteModalComponent {
   clients: Client[] = [];
   isDeleting = false;
   isDeleted = false;
-  dSub: Subscription;
 
   constructor(private clientsService: ClientsService) {}
 
@@ -26,16 +25,12 @@ export class DeleteModalComponent {
   deleteById(id: string) {
     this.isDeleted = false;
     this.isDeleting = true;
-    setTimeout(() => {
-      this.dSub = this.clientsService.deleteById(id).subscribe(() => {
-        this.clients = this.clients.filter((client) => client.id !== id);
-      });
-      this.isDeleting = false;
-      this.isDeleted = true;
-    }, 1000);
-    setTimeout(() => {
-      this.deleteClient.emit();
-    }, 1000);
+    this.clientsService.deleteById(id).subscribe(() => {
+      this.clients = this.clients.filter((client) => client.id !== id);
+    });
+    this.isDeleting = false;
+    this.isDeleted = true;
+    this.deleteClient.emit();
   }
 
   handleClick($event: MouseEvent) {

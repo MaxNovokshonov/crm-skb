@@ -3,7 +3,7 @@
     *ngIf="control.errors?.required && control.touched"
     class="modal__error">Поле обязательно для заполнения</span>
   <span
-    *ngIf="(control.errors?.minlength || control.errors?.pattern || control.errors?.email) && control.touched"
+    *ngIf="(control.errors?.minlength || control.errors?.maxlength || control.errors?.pattern || control.errors?.email) && control.touched"
     class="modal__error">Введите корректные значения</span>
   <form
     [formGroup]="contactsForm"

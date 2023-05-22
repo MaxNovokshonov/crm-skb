@@ -11,6 +11,10 @@ export class ContactsService {
     this.contacts.push(contact);
   }
 
+  addAllContacts(contacts: ClientContacts[]): ClientContacts[] {
+    return (this.contacts = contacts);
+  }
+
   getContacts(): ClientContacts[] {
     return this.contacts;
   }

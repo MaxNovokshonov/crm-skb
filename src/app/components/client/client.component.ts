@@ -15,8 +15,17 @@ export class ClientComponent {
   @Output() delete = new EventEmitter();
   clients: Client[] = [];
   isDeleteModalOpen = false;
+  isEditModalOpen = false;
 
   deleteById() {
     this.delete.emit();
+  }
+
+  openEditModal() {
+    this.isEditModalOpen = true;
+  }
+
+  closeEditModal() {
+    this.isEditModalOpen = false;
   }
 }

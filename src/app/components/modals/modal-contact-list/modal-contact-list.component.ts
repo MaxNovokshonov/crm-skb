@@ -23,13 +23,6 @@ export class ModalContactListComponent implements OnInit {
   @Output() deleteContact = new EventEmitter<ClientContacts>();
   isOpenContacts = false;
   types: Contacts[] = Object.values(Contacts);
-  typesOfContacts = {
-    phone: 'Телефон',
-    email: 'Email',
-    facebook: 'Facebook',
-    vk: 'VK',
-    other: 'Другое',
-  };
   contactsForm = new FormGroup({
     control: new FormControl<string>(''),
   });
@@ -46,6 +39,7 @@ export class ModalContactListComponent implements OnInit {
     const phoneValidators: ValidatorFn[] = [
       Validators.required,
       Validators.minLength(11),
+      Validators.maxLength(11),
       Validators.pattern('[0-9]+'),
     ];
 

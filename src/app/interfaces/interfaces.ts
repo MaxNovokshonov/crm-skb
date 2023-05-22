@@ -1,4 +1,5 @@
 export type ContactsType = 'Телефон' | 'Email' | 'Facebook' | 'VK' | 'Другое';
+
 export enum Contacts {
   phone = 'Телефон',
   email = 'Email',
@@ -6,9 +7,6 @@ export enum Contacts {
   vk = 'VK',
   other = 'Другое',
 }
-export type ModalTitle = 'Новый клиент' | 'Изменить данные';
-export type ModalCancelButton = 'Отмена' | 'Удалить клиента';
-export type ModalSaveButton = 'Добавить' | 'Изменить';
 
 export interface ClientContacts {
   index: number;
@@ -18,9 +16,9 @@ export interface ClientContacts {
 
 export interface Client {
   id: string;
-  name: string | null | undefined;
-  surname: string | null | undefined;
-  lastName: string | null | undefined;
+  name: string;
+  surname: string;
+  lastName: string;
   contacts?: ClientContacts[];
   createdAt: Date;
   updatedAt: Date;

@@ -66,9 +66,6 @@
 
   <app-modal
     *ngIf="isAddModalOpen"
-    [title]="'Новый клиент'"
-    [saveButtonTitle]="'Добавить'"
-    [cancelButtonTitle]="'Отмена'"
     (closeModal)="closeAddModal()"
     (getAll)="getAllClients()"
   ></app-modal>

@@ -3,7 +3,9 @@
     <button class="modal__close btn-reset"
             (click)="closeModalEvent()"
     ></button>
-    <h2 class="modal__title">Новый Клиент</h2>
+    <h2 class="modal__title">Изменить данные
+      <span *ngIf="client.id" class="modal__id">ID: {{ client.id.slice(-6) }}</span>
+    </h2>
     <form class="modal__form add-client"
           [formGroup]="form" (ngSubmit)="submit()"
     >
@@ -56,9 +58,9 @@
           class="modal__error">Только русские буквы</span>
       </div>
       <div class="modal__contact">
-        <ng-container *ngIf="contactsFormOpen == true">
+        <ng-container *ngIf="client.contacts">
           <app-modal-contact-list
-            *ngFor="let contact of contactsService.getContacts(), let i = index"
+            *ngFor="let contact of contactsService.addAllContacts(client.contacts!), let i = index"
             [contact]="contact"
             [index]="i"
             (deleteContact)="deleteContactByIndex($event)">
@@ -66,7 +68,6 @@
         </ng-container>
         <button class="modal__btn-contact modal__btn-contact--active"
                 (click)="increment($event)"
-                [disabled]="contactsService.getContacts().length >= 10"
         >Добавить контакт
           <span class="btn-contact__svg btn-contact__svg--default btn-contact__svg--active">
             <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +93,7 @@
       <button class="modal__btn-save btn-reset site-btn"
               type="submit"
               (click)="showErrorMessage()"
-      >Добавить
+      >Изменить
         <span
           *ngIf="isLoading"
           class="modal__spinner">
@@ -104,8 +105,14 @@
         </span>
       </button>
       <button class="modal__btn-back btn-reset"
-              (click)="closeModalEvent()"
-      >Отмена</button>
+              (click)="deleteClientById(client.id, $event)"
+      >Удалить
+      </button>
+      <span
+        *ngIf="isDeleted"
+        class="modal__error"
+      >Данные о клиенте удалены</span>
     </form>
   </div>
 </div>
+

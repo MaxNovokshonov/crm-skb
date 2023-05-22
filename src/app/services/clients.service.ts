@@ -31,13 +31,34 @@ export class ClientsService {
     );
   }
 
-  deleteById(id: string): Observable<void> {
-    return this.http.delete<void>(`https://crm-skb-default-rtdb.firebaseio.com/clients/${id}.json`);
+  getById(id: string): Observable<Client> {
+    return this.http
+      .get<Client>(`https://crm-skb-default-rtdb.firebaseio.com/clients/${id}.json`)
+      .pipe(
+        map((client: Client) => {
+          return {
+            ...client,
+            id,
+          };
+        }),
+      );
+  }
+  deleteById(id: string): Observable<Client> {
+    return this.http.delete<Client>(
+      `https://crm-skb-default-rtdb.firebaseio.com/clients/${id}.json`,
+    );
   }
 
   addClient(client: Client): Observable<Client> {
     return this.http.post<Client>(
       `https://crm-skb-default-rtdb.firebaseio.com/clients.json`,
+      client,
+    );
+  }
+
+  updateClient(client: Client): Observable<Client> {
+    return this.http.patch<Client>(
+      `https://crm-skb-default-rtdb.firebaseio.com/clients/${client.id}.json`,
       client,
     );
   }
