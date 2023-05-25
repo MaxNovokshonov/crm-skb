@@ -6,13 +6,15 @@ import { ClientContacts } from '../interfaces/interfaces';
 })
 export class ContactsService {
   contacts: ClientContacts[] = [];
+  isValid = false;
 
   addContact(contact: ClientContacts) {
     this.contacts.push(contact);
   }
 
-  addAllContacts(contacts: ClientContacts[]): ClientContacts[] {
-    return (this.contacts = contacts);
+  addAllContacts(contacts: ClientContacts[]) {
+    const newContacts = this.contacts.concat(contacts);
+    this.contacts = newContacts;
   }
 
   getContacts(): ClientContacts[] {
@@ -28,4 +30,5 @@ export class ContactsService {
   clearContacts() {
     this.contacts = [];
   }
+
 }

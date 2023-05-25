@@ -61,7 +61,8 @@
             *ngFor="let contact of contactsService.getContacts(), let i = index"
             [contact]="contact"
             [index]="i"
-            (deleteContact)="deleteContactByIndex($event)">
+            (deleteContact)="deleteContactByIndex($event)"
+            (contactStatus)="isContactsInvalid($event)">
           </app-modal-contact-list>
         </ng-container>
         <button class="modal__btn-contact modal__btn-contact--active"
@@ -86,6 +87,9 @@
       <p class="modal__error"
          *ngIf="isFormInvalid && form.invalid"
       >Введите данные</p>
+      <p class="modal__error"
+         *ngIf="isContacts"
+      >Введите данные контактов</p>
       <p class="modal__error"
          *ngIf="contactsService.getContacts().length >= 10"
       >Максимум 10 контактов</p>

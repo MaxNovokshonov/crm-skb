@@ -18,6 +18,7 @@ export class ModalComponent implements OnDestroy {
   contactsFormOpen = false;
   isLoading = false;
   isFormInvalid = false;
+  isContacts = false;
   contactsCounter = 0;
   form = new FormGroup({
     surname: new FormControl<string>('', [Validators.required, Validators.pattern('[А-Яа-я]+')]),
@@ -49,7 +50,7 @@ export class ModalComponent implements OnDestroy {
   }
 
   submit() {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.isContacts) {
       return;
     }
 
@@ -92,6 +93,14 @@ export class ModalComponent implements OnDestroy {
   showErrorMessage() {
     if (this.form.invalid) {
       this.isFormInvalid = true;
+    }
+  }
+
+  isContactsInvalid(event: any) {
+    if (event == 'INVALID') {
+      this.isContacts = true
+    } else {
+      this.isContacts = false
     }
   }
 }

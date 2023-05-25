@@ -1,3 +1,8 @@
+.no-clients {
+text-align: center;
+  color: var(--color-black3);
+}
+
 .clients {
   padding-top: 130px;
 }
@@ -119,6 +124,7 @@
 
 .display-info__item--actions {
   padding-left: 40px;
+  min-width: 220px;
 }
 
 .clients__btn {

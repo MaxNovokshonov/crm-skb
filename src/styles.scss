@@ -416,7 +416,7 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .site-modal__content {
@@ -424,9 +424,9 @@ body {
   cursor: auto;
   position: absolute;
   padding: 25px 30px;
-  top: 50%;
+  top: 50px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   margin: 0 auto;
   background-color: var(--color-white);
   opacity: 0;

@@ -58,12 +58,15 @@
           class="modal__error">Только русские буквы</span>
       </div>
       <div class="modal__contact">
-        <ng-container *ngIf="client.contacts">
+        <ng-container *ngIf="contactsService.getContacts().length">
           <app-modal-contact-list
-            *ngFor="let contact of contactsService.addAllContacts(client.contacts!), let i = index"
+            *ngFor="let contact of contactsService.getContacts(), let i = index"
             [contact]="contact"
             [index]="i"
-            (deleteContact)="deleteContactByIndex($event)">
+            (deleteContact)="deleteContactByIndex($event)"
+            (contactStatus)="isContactsInvalid($event)"
+          >
+
           </app-modal-contact-list>
         </ng-container>
         <button class="modal__btn-contact modal__btn-contact--active"
@@ -85,8 +88,11 @@
         </button>
       </div>
       <p class="modal__error"
-         *ngIf="isFormInvalid && form.invalid"
+         *ngIf="(isFormInvalid && form.invalid)"
       >Введите данные</p>
+      <p class="modal__error"
+      *ngIf="isContacts"
+      >Введите данные контактов</p>
       <p class="modal__error"
          *ngIf="contactsService.getContacts().length >= 10"
       >Максимум 10 контактов</p>
@@ -105,7 +111,7 @@
         </span>
       </button>
       <button class="modal__btn-back btn-reset"
-              (click)="deleteClientById(client.id, $event)"
+              (click)="deleteClientEvent($event)"
       >Удалить
       </button>
       <span

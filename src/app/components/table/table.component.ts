@@ -1,7 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Client } from '../../interfaces/interfaces';
 import { ClientsService } from '../../services/clients.service';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -14,9 +21,10 @@ export class TableComponent implements OnInit {
   isAddModalOpen = false;
   @Input() searchStr: string;
   loader = false;
+  clientsData = false;
   clients$: Observable<Client[]>;
-  sortDirection = 1;
-  sortField = new BehaviorSubject<string>('surname');
+  sortDirection = -1;
+  sortField = new BehaviorSubject<string>('createdAt');
 
   ngOnInit(): void {
     this.getAllClients();
@@ -24,6 +32,7 @@ export class TableComponent implements OnInit {
 
   getAllClients() {
     this.loader = true;
+    this.clientsData = false;
     this.clients$ = combineLatest(this.clientsService.getAll(), this.sortField).pipe(
       map(([client, field]) => {
         return [
@@ -44,6 +53,7 @@ export class TableComponent implements OnInit {
         ];
       }),
     );
+    this.clientsData = true;
     this.loader = false;
   }
 

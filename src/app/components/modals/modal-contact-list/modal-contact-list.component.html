@@ -26,6 +26,7 @@
     </div>
     <input
       [(ngModel)]="contact.value"
+      (input)="formStatus(contactsForm.status)"
       class="contact__input" placeholder="Введите данные" type="text" formControlName="control">
     <button
       (click)="delete($event, contact)"

@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, DoCheck,
   EventEmitter,
   Input,
   OnChanges,
@@ -21,6 +21,7 @@ export class ModalContactListComponent implements OnInit {
   @Input() contact: ClientContacts;
   @Input() index: number;
   @Output() deleteContact = new EventEmitter<ClientContacts>();
+  @Output() contactStatus = new EventEmitter()
   isOpenContacts = false;
   types: Contacts[] = Object.values(Contacts);
   contactsForm = new FormGroup({
@@ -82,5 +83,9 @@ export class ModalContactListComponent implements OnInit {
 
   ngOnInit() {
     this.toggleValidators(this.contact.type);
+  }
+
+  formStatus(status: any) {
+      this.contactStatus.emit(status)
   }
 }

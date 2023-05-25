@@ -39,7 +39,7 @@
         </tr>
         </thead>
         <tbody class="clients__tbody"
-               *ngIf="clients$ | async as clients"
+               *ngIf="clients$ | async as clients; else noClients"
         >
         <app-client
           *ngFor="let client of clients | searchPipe:searchStr"
@@ -49,7 +49,7 @@
         </tbody>
       </table>
 
-      <app-preloader *ngIf="loader"></app-preloader>
+      <app-preloader *ngIf="loader || !clientsData"></app-preloader>
 
     </div>
     <button
@@ -70,6 +70,8 @@
     (getAll)="getAllClients()"
   ></app-modal>
 
-
+<ng-template #noClients>
+  <h3 class="no-clients">Данных о клиентах не найдено</h3>
+</ng-template>
 </div>
 

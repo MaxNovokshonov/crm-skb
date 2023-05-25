@@ -26,11 +26,10 @@ export class DeleteModalComponent {
     this.isDeleted = false;
     this.isDeleting = true;
     this.clientsService.deleteById(id).subscribe(() => {
-      this.clients = this.clients.filter((client) => client.id !== id);
+      this.isDeleting = false;
+      this.isDeleted = true;
+      this.deleteClient.emit();
     });
-    this.isDeleting = false;
-    this.isDeleted = true;
-    this.deleteClient.emit();
   }
 
   handleClick($event: MouseEvent) {

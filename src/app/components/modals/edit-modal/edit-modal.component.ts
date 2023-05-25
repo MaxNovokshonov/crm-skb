@@ -1,9 +1,18 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ClientsService } from '../../../services/clients.service';
 import { ContactsService } from '../../../services/contacts.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormControl, FormControlStatus, FormGroup, Validators} from '@angular/forms';
 import { Client, ClientContacts } from '../../../interfaces/interfaces';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-modal',
@@ -17,19 +26,27 @@ export class EditModalComponent implements OnInit, OnDestroy {
   @Output() closeModal = new EventEmitter();
   @Output() getAll = new EventEmitter();
   @Output() deleteClient = new EventEmitter();
+  @Output() updateClient = new EventEmitter();
 
   contactsFormOpen = false;
   isLoading = false;
   isFormInvalid = false;
+  isContacts = false;
   contactsCounter = 0;
   isDeleted = false;
   client: Client;
+  clientSubscription: Subscription;
+  contacts: ClientContacts[];
   clients: Client[];
   form: FormGroup;
 
+
   ngOnInit(): void {
-    this.clientService.getById(this.id).subscribe((client: Client) => {
+    this.clientSubscription = this.clientService.getById(this.id).subscribe((client: Client) => {
       this.client = client;
+      if (client.contacts) {
+        this.contactsService.addAllContacts(client.contacts);
+      }
       this.form = new FormGroup({
         surname: new FormControl<string>(client.surname, [
           Validators.required,
@@ -45,6 +62,11 @@ export class EditModalComponent implements OnInit, OnDestroy {
         ]),
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.contactsService.clearContacts();
+    this.clientSubscription.unsubscribe();
   }
 
   get surname() {
@@ -67,11 +89,15 @@ export class EditModalComponent implements OnInit, OnDestroy {
     event.preventDefault();
     this.contactsFormOpen = true;
     this.contactsCounter++;
-    this.contactsService.addContact({ index: this.contactsCounter, type: 'Телефон', value: '' });
+    this.contactsService.addContact({
+      index: this.contactsService.getContacts().length + 1,
+      type: 'Телефон',
+      value: '',
+    });
   }
 
   submit() {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.isContacts) {
       return;
     }
 
@@ -94,7 +120,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.contactsService.clearContacts();
         this.closeModal.emit();
-        this.deleteClient.emit();
+        this.updateClient.emit();
       });
   }
 
@@ -106,24 +132,25 @@ export class EditModalComponent implements OnInit, OnDestroy {
     return this.contactsService.deleteContact(event);
   }
 
-  deleteClientById(id: string, event: MouseEvent) {
+  deleteClientEvent(event: MouseEvent) {
     event.preventDefault();
-    this.clientService.getAll().subscribe((clients: Client[]) => {
-      this.clientService.deleteById(id).subscribe((client: Client) => {
-        this.clients = this.clients.filter((client: Client) => client.id !== id);
-      });
-    });
-    this.isDeleted = true;
     this.deleteClient.emit();
-  }
-
-  ngOnDestroy(): void {
-    this.contactsService.clearContacts();
+    this.closeModal.emit();
   }
 
   showErrorMessage() {
     if (this.form.invalid) {
       this.isFormInvalid = true;
+    } else {
+      this.isFormInvalid = false;
+    }
+  }
+
+  isContactsInvalid(event: any) {
+    if (event == 'INVALID') {
+      this.isContacts = true
+    } else {
+      this.isContacts = false
     }
   }
 }
