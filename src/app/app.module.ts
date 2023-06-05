@@ -15,6 +15,7 @@ import { ModalContactListComponent } from './components/modals/modal-contact-lis
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
 import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
+import { IMaskModule } from 'angular-imask';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,14 @@ import { EditModalComponent } from './components/modals/edit-modal/edit-modal.co
     SearchPipe,
     EditModalComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    IMaskModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

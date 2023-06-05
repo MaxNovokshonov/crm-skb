@@ -2,7 +2,7 @@
 .contact {
   display: flex;
   align-items: center;
-  width: 390px;
+  width: 400px;
   margin-bottom: 25px;
 }
 
@@ -13,8 +13,7 @@
 .contact__name {
   height: 38px;
   z-index: 1;
-  max-width: 134px;
-  min-width: 134px;
+  width: 134px;
   position: relative;
   padding: 10px 60px 10px 12px;
   cursor: pointer;
@@ -57,9 +56,7 @@
   position: absolute;
   font-size: 12px;
   padding: 10px 0 6px;
-  width: 100%;
-  max-width: 134px;
-  min-width: 134px;
+  width: 132px;
   top: 36px;
   left: 0;
   opacity: 0;
@@ -78,6 +75,7 @@
 .contact__item {
   cursor: pointer;
   padding-top: 4px;
+  margin-bottom: 5px;
   border-bottom: 7px;
   padding-left: 12px;
   transition: background-color .3s ease-in-out;

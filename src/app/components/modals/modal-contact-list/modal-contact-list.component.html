@@ -3,8 +3,14 @@
     *ngIf="control.errors?.required && control.touched"
     class="modal__error">Поле обязательно для заполнения</span>
   <span
-    *ngIf="(control.errors?.minlength || control.errors?.maxlength || control.errors?.pattern || control.errors?.email) && control.touched"
-    class="modal__error">Введите корректные значения</span>
+    *ngIf="control.errors?.email"
+    class="modal__error">Некорректный E-mail</span>
+  <span
+    *ngIf="contact.type === 'Телефон' && control.errors?.minlength"
+    class="modal__error">Введите номер телефона полностью</span>
+  <span
+    *ngIf="contact.type === 'Другое' && control.errors?.maxlength"
+    class="modal__error">Не более 12 символов</span>
   <form
     [formGroup]="contactsForm"
     class="contact">
@@ -26,8 +32,11 @@
     </div>
     <input
       [(ngModel)]="contact.value"
-      (input)="formStatus(contactsForm.status)"
-      class="contact__input" placeholder="Введите данные" type="text" formControlName="control">
+      (keyup)="formStatus(contactsForm.status)"
+      class="contact__input" [placeholder]="inputPlaceholder" type="text" formControlName="control"
+      [imask]="inputMask"
+      [unmask]="false"
+    >
     <button
       (click)="delete($event, contact)"
       class="contact__delete">

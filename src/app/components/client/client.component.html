@@ -1,6 +1,6 @@
 <tr class="clients__item">
   <td class="client__id">
-    <span>{{ client.id.toString().slice(-6)}}</span>
+    <span>{{ client.id.toString().slice(2,9)}}</span>
   </td>
   <td class="clients__full-name">
     <span class="clients__surname">{{client.surname | titlecase}}</span>
@@ -50,7 +50,7 @@
 
 <app-edit-modal
   *ngIf="isEditModalOpen"
-  [id] = "client.id"
+  [id]="client.id"
   (closeModal)="closeEditModal()"
   (deleteClient)="isDeleteModalOpen = true"
   (updateClient)="deleteById()"

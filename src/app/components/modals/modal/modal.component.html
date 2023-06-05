@@ -36,7 +36,7 @@
           *ngIf="name.errors?.required && name.touched"
           class="modal__error">Поле обязательно для заполнения</span>
         <span
-          *ngIf="name.errors?.pattern && name.touched"
+          *ngIf="name.errors?.pattern"
           class="modal__error">Только русские буквы</span>
       </div>
       <div class="form-floating">
@@ -86,10 +86,10 @@
       </div>
       <p class="modal__error"
          *ngIf="isFormInvalid && form.invalid"
-      >Введите данные</p>
+      >Введите ФИО</p>
       <p class="modal__error"
          *ngIf="isContacts"
-      >Введите данные контактов</p>
+      >Проверьте данные контактов</p>
       <p class="modal__error"
          *ngIf="contactsService.getContacts().length >= 10"
       >Максимум 10 контактов</p>

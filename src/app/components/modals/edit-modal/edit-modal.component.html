@@ -4,7 +4,7 @@
             (click)="closeModalEvent()"
     ></button>
     <h2 class="modal__title">Изменить данные
-      <span *ngIf="client.id" class="modal__id">ID: {{ client.id.slice(-6) }}</span>
+      <span *ngIf="client.id" class="modal__id">ID: {{ client.id.toString().slice(2,9) }}</span>
     </h2>
     <form class="modal__form add-client"
           [formGroup]="form" (ngSubmit)="submit()"
@@ -92,7 +92,7 @@
       >Введите данные</p>
       <p class="modal__error"
       *ngIf="isContacts"
-      >Введите данные контактов</p>
+      >Проверьте данные контактов</p>
       <p class="modal__error"
          *ngIf="contactsService.getContacts().length >= 10"
       >Максимум 10 контактов</p>

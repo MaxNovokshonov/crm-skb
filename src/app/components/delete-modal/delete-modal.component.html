@@ -16,7 +16,9 @@
       class="delete-modal__delete btn-reset site-btn"
       (click)="deleteById(id)"
     >Удалить
-      <span [class.modal__spinner]="isDeleting">
+      <span
+        class="modal__spinner"
+        *ngIf="isDeleting">
         <svg width="13" height="13" viewBox="0 0 13 13">
           <use xlink:href="/assets/img/icon-sprite.svg#svgSpinner"></use>
         </svg>

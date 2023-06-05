@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ClientsService } from '../../../services/clients.service';
 import { ContactsService } from '../../../services/contacts.service';
-import {FormControl, FormControlStatus, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormControlStatus, FormGroup, Validators } from '@angular/forms';
 import { Client, ClientContacts } from '../../../interfaces/interfaces';
 import { Observable, Subscription } from 'rxjs';
 
@@ -40,7 +40,6 @@ export class EditModalComponent implements OnInit, OnDestroy {
   clients: Client[];
   form: FormGroup;
 
-
   ngOnInit(): void {
     this.clientSubscription = this.clientService.getById(this.id).subscribe((client: Client) => {
       this.client = client;
@@ -50,15 +49,15 @@ export class EditModalComponent implements OnInit, OnDestroy {
       this.form = new FormGroup({
         surname: new FormControl<string>(client.surname, [
           Validators.required,
-          Validators.pattern('[А-Яа-я]+'),
+          Validators.pattern('[а-яёА-ЯЁ ]+'),
         ]),
         name: new FormControl<string>(client.name, [
           Validators.required,
-          Validators.pattern('[А-Яа-я]+'),
+          Validators.pattern('[а-яёА-ЯЁ ]+'),
         ]),
         lastname: new FormControl<string>(client.lastName, [
           Validators.required,
-          Validators.pattern('[А-Яа-я]+'),
+          Validators.pattern('[а-яёА-ЯЁ ]+'),
         ]),
       });
     });
@@ -148,9 +147,9 @@ export class EditModalComponent implements OnInit, OnDestroy {
 
   isContactsInvalid(event: any) {
     if (event == 'INVALID') {
-      this.isContacts = true
+      this.isContacts = true;
     } else {
-      this.isContacts = false
+      this.isContacts = false;
     }
   }
 }

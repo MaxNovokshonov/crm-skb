@@ -21,9 +21,12 @@ export class ModalComponent implements OnDestroy {
   isContacts = false;
   contactsCounter = 0;
   form = new FormGroup({
-    surname: new FormControl<string>('', [Validators.required, Validators.pattern('[А-Яа-я]+')]),
-    name: new FormControl<string>('', [Validators.required, Validators.pattern('[А-Яа-я]+')]),
-    lastname: new FormControl<string>('', [Validators.required, Validators.pattern('[А-Яа-я]+')]),
+    surname: new FormControl<string>('', [Validators.required, Validators.pattern('[а-яёА-ЯЁ ]+')]),
+    name: new FormControl<string>('', [Validators.required, Validators.pattern('[а-яёА-ЯЁ ]+')]),
+    lastname: new FormControl<string>('', [
+      Validators.required,
+      Validators.pattern('[а-яёА-ЯЁ ]+'),
+    ]),
   });
 
   get surname() {
@@ -98,9 +101,9 @@ export class ModalComponent implements OnDestroy {
 
   isContactsInvalid(event: any) {
     if (event == 'INVALID') {
-      this.isContacts = true
+      this.isContacts = true;
     } else {
-      this.isContacts = false
+      this.isContacts = false;
     }
   }
 }
